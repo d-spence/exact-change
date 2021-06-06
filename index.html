@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exact Change</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Exact Change</h1>
+
+  <div class="input-container">
+    <span>Enter a dollar value $</span>
+    <input type="number" id="input-value" onfocus="this.select()" value="1.41" step="0.01" min="0" max="100" placeholder="Enter a dollar value" required>
+    <div class = "input-btns">
+      <button id="reset-btn">Reset</button>
+      <button id="submit-btn">Submit</button>
+    </div>
+  </div>
+
+  <div class="change-container">
+    <div class="change-grid-label">
+      <h3 class="change-label">Dollars</h3>
+      <h3 class="change-label">Quarters</h3>
+      <h3 class="change-label">Dimes</h3>
+      <h3 class="change-label">Nickels</h3>
+      <h3 class="change-label">Pennies</h3>
+    </div>
+
+    <div class="change-grid-label">
+      <h5 id="dollars-label" class="change-label"></h5>
+      <h5 id="quarters-label" class="change-label"></h5>
+      <h5 id="dimes-label" class="change-label"></h5>
+      <h5 id="nickels-label" class="change-label"></h5>
+      <h5 id="pennies-label" class="change-label"></h5>
+    </div>
+
+    <div class="change-grid">
+      <div class="change" id="dollars">
+        <!-- Dollar images will be displayed here -->
+      </div>
+      <div class="change" id="quarters">
+        <!-- Quarter images will be displayed here -->
+      </div>
+      <div class="change" id="dimes">
+        <!-- Dime images will be displayed here -->
+      </div>
+      <div class="change" id="nickels">
+        <!-- Nickel images will be displayed here -->
+      </div>
+      <div class="change" id="pennies">
+        <!-- Penny images will be displayed here -->
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  background: repeating-linear-gradient(45deg, hsl(160, 100%, 95%), hsl(160, 80%, 90%) 200px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: stretch;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: hsl(160, 20%, 80%, 0.3);
+  border: 1px solid hsl(160, 40%, 60%);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.input-container input {
+  width: 200px;
+  background-color: hsl(155, 70%, 90%);
+  border: 1px solid hsl(160, 40%, 60%);
+  border-radius: 10px;
+  font-size: 18px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.input-btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-btns button {
+  background-color: hsl(160, 40%, 70%);
+  color: hsl(155, 40%, 40%);
+  border: 1px solid hsl(160, 40%, 60%);
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 5px;
+  padding: 5px 30px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.input-btns button:hover {
+  background-color: hsl(160, 40%, 80%);
+}
+
+.change-label {
+  margin: 0;
+}
+
+.change-grid,
+.change-grid-label {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
+  gap: 10px;
+  text-align: center;
+  overflow: clip;
+}
+
+.change-grid {
+  grid-template-rows: 100%;
+}
+
+.change-grid-label {
+  grid-template-rows: 30px;
+}
+
+.change {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible;
+  background: linear-gradient(hsl(160, 80%, 80%, 0.8), hsl(160, 80%, 80%, 0));
+  border-radius: 10px;
+  min-height: 50vh;
+  min-width: 80px;
+  padding: 5px 10px;
+}
+
+.change img {
+  height: 100%;
+  width: auto;
+  margin: 2px;
+  animation: 1s slideUp forwards;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(500px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
