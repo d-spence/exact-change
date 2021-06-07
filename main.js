@@ -24,6 +24,7 @@ let animating = false; // set to true when animating
 
 const coinImages = ['dime.png', 'dollar.png', 'nickel.png', 'penny.png', 'quarter.png'];
 preloadImages('images/coins/', coinImages);
+audio.muted = false; // unmute the audio when script loads
 
 function preloadImages(dir, images) {
   images.forEach(image => {
