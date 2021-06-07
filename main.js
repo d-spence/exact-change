@@ -4,6 +4,7 @@ import './style.css';
 const inputValue = document.querySelector('#input-value');
 const resetBtn = document.querySelector('#reset-btn');
 const submitBtn = document.querySelector('#submit-btn');
+const randomBtn = document.querySelector('#random-btn');
 const audio = document.querySelector('#audio');
 const dollars = document.querySelector('#dollars');
 const quarters = document.querySelector('#quarters');
@@ -41,9 +42,13 @@ function resetInput() {
   }
 }
 
-function submitInput() {
-  let change = getChange(inputValue.value);
+function submitInput(random=false) {
+  inputValue.value = currency(inputValue.value);
   if (!animating) {
+    let value = inputValue.value;
+    let change = (random) ? getRandomChange(value) : getChange(value);
+
+    audio.fastSeek(0);
     audio.play();
     clearChangeElems(changeElemArray);
     clearChangeElems(labelsElemArray);
@@ -75,6 +80,25 @@ function getChange(value) {
     }
   }
   // console.log(change);
+  return change;
+}
+
+function getRandomChange(value) {
+  const changeValues = {dollar: 1.00, quarter: 0.25, dime: 0.10, nickel: 0.05, penny: 0.01};
+  const changeTypes = Object.keys(changeValues);
+  let change = {dollar: 0, quarter: 0, dime: 0, nickel: 0, penny: 0};
+  let v = currency(value);
+  let coin;
+
+  while (v > 0) {
+    // Get a random coin
+    coin = changeTypes[Math.floor(Math.random() * changeTypes.length)];
+    if (v >= changeValues[coin]) {
+      change[coin] += 1;
+      v = v.subtract(changeValues[coin]);
+    }
+  }
+  console.log(change);
   return change;
 }
 
@@ -130,7 +154,8 @@ function updateChangeLabels(change) {
 
 // Event listeners
 resetBtn.addEventListener('click', resetInput);
-submitBtn.addEventListener('click', submitInput);
+submitBtn.addEventListener('click', () => submitInput(false));
+randomBtn.addEventListener('click', () => submitInput(true));
 
 // Shortcut key event listeners
 document.addEventListener('keydown', (e) => {

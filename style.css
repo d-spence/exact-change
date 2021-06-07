@@ -37,9 +37,9 @@ body {
 }
 
 .input-btns {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 1fr;
 }
 
 .input-btns button {
@@ -57,6 +57,16 @@ body {
 
 .input-btns button:hover {
   background-color: hsl(160, 40%, 80%);
+}
+
+#random-btn {
+  grid-column: span 2;
+  background-color: hsl(55, 80%, 70%);
+  color: hsl(55, 80%, 35%);
+}
+
+#random-btn:hover {
+  background-color: hsl(55, 80%, 80%);
 }
 
 .change-label {
