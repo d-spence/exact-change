@@ -5,13 +5,12 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Exact Change</title>
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Exact Change</h1>
 
   <div class="input-container">
-    <span>Enter a dollar value $</span>
+    <span>Enter a US dollar value $</span>
     <input type="number" id="input-value" onfocus="this.select()" value="1.41" step="0.01" min="0" max="100" placeholder="Enter a dollar value" required>
     <div class = "input-btns">
       <button id="reset-btn">Reset</button>
@@ -54,6 +53,8 @@
       </div>
     </div>
   </div>
+
+  <audio src="sounds/change.mp3" id="audio" preload="auto"></audio>
 
   <script type="module" src="/main.js"></script>
 </body>

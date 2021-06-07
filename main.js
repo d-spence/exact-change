@@ -1,8 +1,10 @@
 import currency from 'currency.js';
+import './style.css';
 
 const inputValue = document.querySelector('#input-value');
 const resetBtn = document.querySelector('#reset-btn');
 const submitBtn = document.querySelector('#submit-btn');
+const audio = document.querySelector('#audio');
 const dollars = document.querySelector('#dollars');
 const quarters = document.querySelector('#quarters');
 const dimes = document.querySelector('#dimes');
@@ -20,6 +22,16 @@ const labelsElemArray = [dollarsLabel, quartersLabel, dimesLabel, nickelsLabel, 
 const defaultValue = '1.41';
 let animating = false; // set to true when animating
 
+const coinImages = ['dime.png', 'dollar.png', 'nickel.png', 'penny.png', 'quarter.png'];
+preloadImages('images/coins/', coinImages);
+
+function preloadImages(dir, images) {
+  images.forEach(image => {
+    const imgSrc = `${dir}${image}`;
+    new Image().src = imgSrc;
+  });
+}
+
 function resetInput() {
   inputValue.value = defaultValue;
   if (!animating) {
@@ -31,6 +43,7 @@ function resetInput() {
 function submitInput() {
   let change = getChange(inputValue.value);
   if (!animating) {
+    audio.play();
     clearChangeElems(changeElemArray);
     clearChangeElems(labelsElemArray);
     displayChangeElems(change);
