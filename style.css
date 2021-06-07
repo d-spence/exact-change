@@ -8,6 +8,7 @@ body {
   height: 100vh;
   margin: 0;
   font-family: 'Lato', sans-serif;
+  font-size: 18px;
   background: repeating-linear-gradient(45deg, hsl(160, 100%, 95%), hsl(160, 80%, 90%) 200px);
   display: flex;
   flex-direction: column;
@@ -27,18 +28,18 @@ body {
 }
 
 .input-container input {
-  width: 200px;
+  width: 160px;
   background-color: hsl(155, 70%, 90%);
   border: 1px solid hsl(160, 40%, 60%);
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 20px;
   padding: 10px;
   margin: 10px;
 }
 
 .input-btns {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
 }
 
@@ -47,7 +48,7 @@ body {
   color: hsl(155, 40%, 40%);
   border: 1px solid hsl(160, 40%, 60%);
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   margin: 5px;
   padding: 5px 30px;
@@ -99,12 +100,12 @@ body {
   background: linear-gradient(hsl(160, 80%, 80%, 0.8), hsl(160, 80%, 80%, 0));
   border-radius: 10px;
   min-height: 50vh;
-  min-width: 80px;
+  min-width: 90px;
   padding: 5px 10px;
 }
 
 .change img {
-  height: 100%;
+  height: 60px;
   width: auto;
   margin: 2px;
   animation: 1s slideUp forwards;

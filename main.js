@@ -20,9 +20,13 @@ const penniesLabel = document.querySelector('#pennies-label');
 const changeElemArray = [dollars, quarters, dimes, nickels, pennies];
 const labelsElemArray = [dollarsLabel, quartersLabel, dimesLabel, nickelsLabel, penniesLabel];
 
-const defaultValue = '1.41';
+const changeValues = {dollar: 1.00, quarter: 0.25, dime: 0.10, nickel: 0.05, penny: 0.01};
+const changeTypes = Object.keys(changeValues);
+
+const defaultValue = '1.41'; // default input value
 let animating = false; // set to true when animating
 
+// Preload
 const coinImages = ['dime.png', 'dollar.png', 'nickel.png', 'penny.png', 'quarter.png'];
 preloadImages('images/coins/', coinImages);
 audio.muted = false; // unmute the audio when script loads
@@ -60,23 +64,16 @@ function submitInput(random=false) {
 function getChange(value) {
   let change = {dollar: 0, quarter: 0, dime: 0, nickel: 0, penny: 0};
   let v = currency(value);
+  let type;
 
   while (v > 0) {
-    if (v >= 1.00) {
-      v = v.subtract(1.00);
-      change.dollar += 1;
-    } else if (v >= 0.25) {
-      v = v.subtract(0.25);
-      change.quarter += 1;
-    } else if (v >= 0.10) {
-      v = v.subtract(0.10);
-      change.dime += 1;
-    } else if (v >= 0.05) {
-      v = v.subtract(0.05);
-      change.nickel += 1;
-    } else if (v >= 0.01) {
-      v = v.subtract(0.01);
-      change.penny += 1;
+    for (let i = 0; i < changeTypes.length; i++) {
+      type = changeTypes[i];
+      if (v >= changeValues[type]) {
+        change[type] += 1;
+        v = v.subtract(changeValues[type]);
+        break;
+      }
     }
   }
   // console.log(change);
@@ -84,21 +81,19 @@ function getChange(value) {
 }
 
 function getRandomChange(value) {
-  const changeValues = {dollar: 1.00, quarter: 0.25, dime: 0.10, nickel: 0.05, penny: 0.01};
-  const changeTypes = Object.keys(changeValues);
   let change = {dollar: 0, quarter: 0, dime: 0, nickel: 0, penny: 0};
   let v = currency(value);
-  let coin;
+  let type;
 
   while (v > 0) {
     // Get a random coin
-    coin = changeTypes[Math.floor(Math.random() * changeTypes.length)];
-    if (v >= changeValues[coin]) {
-      change[coin] += 1;
-      v = v.subtract(changeValues[coin]);
+    type = changeTypes[Math.floor(Math.random() * changeTypes.length)];
+    if (v >= changeValues[type]) {
+      change[type] += 1;
+      v = v.subtract(changeValues[type]);
     }
   }
-  console.log(change);
+  // console.log(change);
   return change;
 }
 
@@ -107,11 +102,11 @@ function createImgElement(type) {
   newImgElem.src = `images/coins/${type}.png`;
 
   switch (type) {
-    case 'dollar': newImgElem.style.height = '55px'; break;
-    case 'dime': newImgElem.style.height = '35px'; break;
-    case 'nickel': newImgElem.style.height = '45px'; break;
-    case 'penny': newImgElem.style.height = '40px'; break;
-    default: newImgElem.style.height = '50px'; break;
+    case 'dollar': newImgElem.style.height = '65px'; break;
+    case 'dime': newImgElem.style.height = '45px'; break;
+    case 'nickel': newImgElem.style.height = '55px'; break;
+    case 'penny': newImgElem.style.height = '50px'; break;
+    default: newImgElem.style.height = '60px'; break;
   }
   return newImgElem;
 }
