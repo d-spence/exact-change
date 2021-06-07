@@ -5,6 +5,7 @@ const inputValue = document.querySelector('#input-value');
 const resetBtn = document.querySelector('#reset-btn');
 const submitBtn = document.querySelector('#submit-btn');
 const randomBtn = document.querySelector('#random-btn');
+const message = document.querySelector('#message');
 const audio = document.querySelector('#audio');
 const dollars = document.querySelector('#dollars');
 const quarters = document.querySelector('#quarters');
@@ -24,6 +25,8 @@ const changeValues = {dollar: 1.00, quarter: 0.25, dime: 0.10, nickel: 0.05, pen
 const changeTypes = Object.keys(changeValues);
 
 const defaultValue = '1.41'; // default input value
+const maxValue = '1000.00';
+const minValue = '0.01';
 let animating = false; // set to true when animating
 
 // Preload
@@ -40,6 +43,7 @@ function preloadImages(dir, images) {
 
 function resetInput() {
   inputValue.value = defaultValue;
+  message.innerHTML = null;
   if (!animating) {
     clearChangeElems(changeElemArray);
     clearChangeElems(labelsElemArray);
@@ -48,6 +52,14 @@ function resetInput() {
 
 function submitInput(random=false) {
   inputValue.value = currency(inputValue.value);
+  message.innerHTML = null;
+
+  if (+inputValue.value > +maxValue || +inputValue.value < +minValue) {
+    console.log(inputValue.value, maxValue, minValue);
+    message.innerHTML = `Value must be between ${minValue} and ${maxValue}`;
+    return;
+  }
+
   if (!animating) {
     let value = inputValue.value;
     let change = (random) ? getRandomChange(value) : getChange(value);
@@ -140,10 +152,10 @@ function clearChangeElems(elemArray) {
 }
 
 function updateChangeLabels(change) {
-  Object.keys(change).forEach((type, i) => {
-    Array(change[type]).fill().forEach(() => {
-      labelsElemArray[i].innerHTML = `x${change[type]}`;
-    });
+  let typeTotal;
+  changeTypes.forEach((type, i) => {
+    typeTotal = currency(changeValues[type] * change[type]);
+    labelsElemArray[i].innerHTML = `x${change[type]} ($${typeTotal})`;
   });
 }
 

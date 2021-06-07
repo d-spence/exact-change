@@ -13,10 +13,25 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: stretch;
+  justify-content: space-between;
 }
 
-.input-container {
+footer {
+  height: 60px;
+  width: 100%;
+  background-color: hsl(160, 20%, 80%, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer span, a {
+  text-decoration: none;
+  color: hsl(155, 40%, 40%);
+}
+
+.input-container,
+.stats-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -70,6 +85,10 @@ body {
   background-color: hsl(55, 80%, 80%);
 }
 
+#message {
+  color: red;
+}
+
 .change-label {
   margin: 0;
 }
@@ -109,6 +128,14 @@ body {
   width: auto;
   margin: 2px;
   animation: 1s slideUp forwards;
+}
+
+.stats-container {
+  width: 50%;
+}
+
+.stats-container h3 {
+  margin: 0 0 10px 0;
 }
 
 @keyframes slideUp {

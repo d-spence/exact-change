@@ -11,7 +11,8 @@
 
   <div class="input-container">
     <span>Enter a US dollar value $</span>
-    <input type="number" id="input-value" onfocus="this.select()" value="1.41" step="0.01" min="0" max="100" placeholder="Enter a value" required>
+    <input type="number" id="input-value" onfocus="this.select()" value="1.41" step="0.01" placeholder="Enter a value" required>
+    <span id="message"></span>
     <div class = "input-btns">
       <button id="reset-btn">Reset</button>
       <button id="submit-btn">Submit</button>
@@ -29,11 +30,11 @@
     </div>
 
     <div class="change-grid-label">
-      <h5 id="dollars-label" class="change-label"></h5>
-      <h5 id="quarters-label" class="change-label"></h5>
-      <h5 id="dimes-label" class="change-label"></h5>
-      <h5 id="nickels-label" class="change-label"></h5>
-      <h5 id="pennies-label" class="change-label"></h5>
+      <h6 id="dollars-label" class="change-label"></h6>
+      <h6 id="quarters-label" class="change-label"></h6>
+      <h6 id="dimes-label" class="change-label"></h6>
+      <h6 id="nickels-label" class="change-label"></h6>
+      <h6 id="pennies-label" class="change-label"></h6>
     </div>
 
     <div class="change-grid">
@@ -55,9 +56,9 @@
     </div>
   </div>
 
-  <div class="stats-container">
-
-  </div>
+  <footer>
+    <span>2021, <a href="https://dspence.net/">Dan Spencer</a></span>
+  </footer>
 
   <audio src="sounds/change.mp3" id="audio" muted autoplay></audio>
 
