@@ -12,6 +12,11 @@ const quarters = document.querySelector('#quarters');
 const dimes = document.querySelector('#dimes');
 const nickels = document.querySelector('#nickels');
 const pennies = document.querySelector('#pennies');
+const dollarsCb = document.querySelector('#dollars-checkbox');
+const quartersCb = document.querySelector('#quarters-checkbox');
+const dimesCb = document.querySelector('#dimes-checkbox');
+const nickelsCb = document.querySelector('#nickels-checkbox');
+const penniesCb = document.querySelector('#pennies-checkbox');
 const dollarsLabel = document.querySelector('#dollars-label');
 const quartersLabel = document.querySelector('#quarters-label');
 const dimesLabel = document.querySelector('#dimes-label');
@@ -19,6 +24,7 @@ const nickelsLabel = document.querySelector('#nickels-label');
 const penniesLabel = document.querySelector('#pennies-label');
 
 const changeElemArray = [dollars, quarters, dimes, nickels, pennies];
+const cbElemArray = [dollarsCb, quartersCb, dimesCb, nickelsCb, penniesCb];
 const labelsElemArray = [dollarsLabel, quartersLabel, dimesLabel, nickelsLabel, penniesLabel];
 
 const changeValues = {dollar: 1.00, quarter: 0.25, dime: 0.10, nickel: 0.05, penny: 0.01};
@@ -27,6 +33,8 @@ const changeTypes = Object.keys(changeValues);
 const defaultValue = '1.41'; // default input value
 const maxValue = '1000.00';
 const minValue = '0.01';
+
+let checkedState = {dollar: true, quarter: true, dime: true, nickel: true, penny: true};
 let animating = false; // set to true when animating
 
 // Preload
@@ -44,6 +52,7 @@ function preloadImages(dir, images) {
 function resetInput() {
   inputValue.value = defaultValue;
   message.innerHTML = null;
+  updateCheckedState(true);
   if (!animating) {
     clearChangeElems(changeElemArray);
     clearChangeElems(labelsElemArray);
@@ -53,6 +62,7 @@ function resetInput() {
 function submitInput(random=false) {
   inputValue.value = currency(inputValue.value);
   message.innerHTML = null;
+  updateCheckedState();
 
   if (+inputValue.value > +maxValue || +inputValue.value < +minValue) {
     console.log(inputValue.value, maxValue, minValue);
@@ -70,6 +80,8 @@ function submitInput(random=false) {
     clearChangeElems(labelsElemArray);
     displayChangeElems(change);
     updateChangeLabels(change);
+    // console.table({change});
+    // console.table({checkedState});
   }
 }
 
@@ -81,14 +93,13 @@ function getChange(value) {
   while (v > 0) {
     for (let i = 0; i < changeTypes.length; i++) {
       type = changeTypes[i];
-      if (v >= changeValues[type]) {
+      if (checkedState[type] && v >= changeValues[type]) {
         change[type] += 1;
         v = v.subtract(changeValues[type]);
         break;
       }
     }
   }
-  // console.log(change);
   return change;
 }
 
@@ -100,13 +111,23 @@ function getRandomChange(value) {
   while (v > 0) {
     // Get a random coin
     type = changeTypes[Math.floor(Math.random() * changeTypes.length)];
-    if (v >= changeValues[type]) {
+    if (checkedState[type] && v >= changeValues[type]) {
       change[type] += 1;
       v = v.subtract(changeValues[type]);
     }
   }
-  // console.log(change);
   return change;
+}
+
+function updateCheckedState(reset=false) {
+  changeTypes.forEach((type, i) => {
+    if (reset) {
+      checkedState[type] = true;
+      cbElemArray[i].checked = true;
+    } else {
+      checkedState[type] = cbElemArray[i].checked;
+    }
+  });
 }
 
 function createImgElement(type) {

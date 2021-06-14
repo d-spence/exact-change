@@ -17,7 +17,7 @@ body {
 }
 
 footer {
-  height: 60px;
+  height: auto;
   width: 100%;
   background-color: hsl(160, 20%, 80%, 0.3);
   display: flex;
@@ -28,6 +28,8 @@ footer {
 footer span, a {
   text-decoration: none;
   color: hsl(155, 40%, 40%);
+  font-size: 1rem;
+  padding: 4px;
 }
 
 .input-container,
